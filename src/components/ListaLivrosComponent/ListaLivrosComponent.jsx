@@ -5,11 +5,12 @@ import LivroCardComponent from '../LivroCardComponent/LivroCardComponent';
 import { Link } from 'react-router-dom';
 
 export default function ListaLivrosComponent(props) {
+    
     const booklist = props.booklist;
 
     return (
         <Grid direction="column" alignItems="center" sx={{ minHeight: '80vh' }}>
-            <Grid item size={12}>
+            <Grid size={12}>
                 <TitleComponent
                     upperTitle={props.upperTitle}
                     title={props.title}
@@ -17,7 +18,7 @@ export default function ListaLivrosComponent(props) {
                 />
             </Grid>
 
-            <Grid item size={12}>
+            <Grid size={12}>
                 <Box sx={{
                     p: {
                         xs: 1,
@@ -33,6 +34,7 @@ export default function ListaLivrosComponent(props) {
                                 if (book.id === 1) {
                                     return (
                                         <LivroCardComponent
+                                            key={book.id}
                                             numero={book.id}
                                             autor={book.author}
                                             titulo={book.title}
@@ -44,6 +46,7 @@ export default function ListaLivrosComponent(props) {
                                 } else {
                                     return (
                                         <LivroCardComponent
+                                            key={book.id}
                                             numero={book.id}
                                             autor={book.author}
                                             titulo={book.title}
@@ -58,7 +61,7 @@ export default function ListaLivrosComponent(props) {
                             :
                             <>
                                 <p>ops... parece que não existem livros cadastrados</p>
-                                <Grid item size={12} sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+                                <Grid size={12} sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
                                     <Button
                                         component={Link}
                                         to="/cadastro"
