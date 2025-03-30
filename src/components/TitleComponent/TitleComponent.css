@@ -1,0 +1,33 @@
+.Upper-title-titleComponent {
+    font-weight:400;
+    font-size: 1.2em;
+    color: #001994;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.Main-title-titleComponent {
+    font-weight:bold;
+    color: #000936;
+    margin-top: 0em;
+    margin-bottom: .2em;
+    text-align: center;
+}
+
+.Main-subtitle-titleComponent {
+    font-weight: 300;
+    color: #000936;
+    margin-top: 0em;
+    margin-bottom: .2em;
+    text-align: center;
+}
+
+.Main-button-titleComponent {
+    background-color: linear-gradient(180deg, #3153FF 0%, #2141E3 100%);
+    stroke: linear-gradient(180deg, #3153FF 0%, #2141E3 100%);
+    color: #FAFBFF;
+    border-radius: 8;
+    font-weight: bold;
+    padding-top: .3em;
+    padding-bottom: .3em;
+};

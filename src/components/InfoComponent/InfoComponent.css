@@ -1,0 +1,34 @@
+.Upper-title {
+    font-weight:400;
+    font-size: 1.2em;
+    color: #001994;
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.Main-title {
+    font-weight:bold;
+    font-size: 2.2em;
+    color: #000936;
+    margin-top: 0em;
+    margin-bottom: .2em;
+    text-align: left;
+}
+
+.Main-paragraph {
+    font-weight: 300;
+    font-size: 1.2em;
+    color: #000936;
+    margin-top: 0em;
+    margin-bottom: .2em;
+    text-align: left;
+}
+
+.Ref-button {
+    color: #2141E3;
+    border-radius: 8;
+    font-weight: bold;
+    padding-top: .3em;
+    padding-bottom: .3em;
+    text-align: right
+};
