@@ -3,10 +3,11 @@ import { TextField, Button } from '@mui/material';
 import { Box, Grid } from '@mui/system';
 
 import './CadastroComponent.css';
+import { Link } from 'react-router-dom';
 
 export default function CadastroComponent(props) {
     return (
-        <Grid direction="column" alignItems="center" sx={{ minHeight: '80vh' }}>
+        <Grid direction="column" alignItems="center" sx={{ minHeight: '90vh' }}>
             <Grid item size={12}>
                 <TitleComponent
                     upperTitle={props.upperTitle}
@@ -16,10 +17,10 @@ export default function CadastroComponent(props) {
             </Grid>
 
             <Grid item size={12} >
-                <Box sx={{ p: 4, backgroundColor: '#f9f9fb', borderRadius: '8px'}}>
+                <Box sx={{ p: 4, backgroundColor: '#f9f9fb', borderRadius: '8px' }}>
                     <Grid container spacing={2}>
                         {/* Formulário */}
-                        <Grid item size={{xs: 12, md: 8}}>
+                        <Grid item size={{ xs: 12, md: 8 }}>
                             <Grid container direction="column" spacing={2}>
                                 <Grid item>
                                     <TextField fullWidth label="nome do livro" variant="outlined" />
@@ -39,7 +40,9 @@ export default function CadastroComponent(props) {
                                     />
                                 </Grid>
                                 <Grid item sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                                    <Button variant="contained" sx={{ background: 'linear-gradient(90deg, #3b5bfb 0%, #5f70ff 100%)' }}>
+                                    <Button
+                                        variant="contained"
+                                        sx={{ background: 'linear-gradient(90deg, #3b5bfb 0%, #5f70ff 100%)' }}>
                                         Cadastrar
                                     </Button>
                                 </Grid>
@@ -87,7 +90,11 @@ export default function CadastroComponent(props) {
                     </Grid>
                 </Box>
                 <Grid item size={12} sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
-                    <Button variant="outlined" sx={{ color: '#3b5bfb', borderColor: '#3b5bfb' }}>
+                    <Button
+                        component={Link}
+                        to="/meus-livros"
+                        variant="outlined"
+                        sx={{ color: '#3b5bfb', borderColor: '#3b5bfb' }}>
                         Veja seus livros cadastrados
                     </Button>
                 </Grid>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Grid } from '@mui/system';
 import { Button, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 import './TitleComponent.css';
 
@@ -50,6 +51,8 @@ export default function TitleComponent(props) {
             <Grid item>
                 <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mt: 2 }}>
                     {props.mainButtonText && <Button
+                        component={Link}
+                        to="/cadastro"
                         variant="contained"
                         size="large"
                         sx={{
@@ -66,6 +69,8 @@ export default function TitleComponent(props) {
                     }
                     {props.secondaryButtonText &&
                         <Button
+                            component={Link}
+                            to="/meus-livros"
                             variant="outlined"
                             size="large"
                             sx={{
