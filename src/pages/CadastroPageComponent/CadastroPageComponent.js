@@ -1,4 +1,4 @@
-import CadastroComponent from "../components/CadastroComponent/CadastroComponent";
+import CadastroComponent from "../../components/CadastroComponent/CadastroComponent";
 
 export default function CadastroPageComponent(props) {
 

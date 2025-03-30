@@ -1,5 +1,5 @@
-import TitleComponent from "../TitleComponent/TitleComponent";
-import InfoComponent from "../InfoComponent/InfoComponent";
+import TitleComponent from "../../components/TitleComponent/TitleComponent";
+import InfoComponent from "../../components/InfoComponent/InfoComponent";
 
 export default function HomePageComponent(props) {
 

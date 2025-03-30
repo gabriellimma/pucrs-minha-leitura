@@ -1,4 +1,4 @@
-import ListaLivrosComponent from "../ListaLivrosComponent/ListaLivrosComponent";
+import ListaLivrosComponent from "../../components/ListaLivrosComponent/ListaLivrosComponent";
 
 export default function MeusLivrosPageComponent(props) {
     
