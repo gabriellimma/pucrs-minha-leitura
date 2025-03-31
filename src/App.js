@@ -1,14 +1,17 @@
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { Grid } from '@mui/system';
-import booklist from './data/booklist.json'
 import news from './data/noticias.json'
 import NavComponent from './components/NavComponent/NavComponent';
 import HomePageComponent from './pages/HomePageComponent/HomePageComponent';
 import CadastroPageComponent from './pages/CadastroPageComponent/CadastroPageComponent';
 import MeusLivrosPageComponent from './pages/MeusLivrosPageComponent/MeusLivrosPageComponent';
+import useBooklist from './hooks/useBooklist';
 
 function App() {
+
+  const booklist = useBooklist().booklist
+
   return (
     <Router>
       <NavComponent></NavComponent>
