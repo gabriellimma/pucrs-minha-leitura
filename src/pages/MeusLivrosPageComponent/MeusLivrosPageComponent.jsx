@@ -10,6 +10,7 @@ export default function MeusLivrosPageComponent(props) {
         title="livros cadastrados"
         subtitle="veja seu progresso nas leituras e compartilhe com seus amigos"
         booklist={booklist}
+        useRemoveLivro={props.useRemoveLivro}
       ></ListaLivrosComponent>
     )
 }

@@ -9,12 +9,14 @@ import CadastroPageComponent from './pages/CadastroPageComponent/CadastroPageCom
 import MeusLivrosPageComponent from './pages/MeusLivrosPageComponent/MeusLivrosPageComponent';
 import useBooklist from './hooks/useBooklist';
 import useAddBook from './hooks/useAddBook';
+import useRemoveBook from './hooks/useRemoveBook';
 
 function App() {
 
   const [shouldReload, setShouldReload] = useState(false);
   const endpointGetLivros = useBooklist(shouldReload).booklist;
-  const endpointCadastroLivros = useAddBook(setShouldReload).addBook;
+  const useCadastrarNovoLivro = useAddBook(setShouldReload).addBook;
+  const useRemoveLivro = useRemoveBook(setShouldReload).removeBook;
 
   return (
     <Router>
@@ -30,10 +32,11 @@ function App() {
           <Route path='/' element={<HomePageComponent news={news}/>} />
           <Route path='/cadastro' element={<CadastroPageComponent 
             news={news}
-            endpointCadastroLivros={endpointCadastroLivros}
+            useCadastrarNovoLivro={useCadastrarNovoLivro}
             />} />
           <Route path='/meus-livros' element={<MeusLivrosPageComponent 
-            booklist={endpointGetLivros} 
+            booklist={endpointGetLivros}
+            useRemoveLivro={useRemoveLivro}
           />} />
         </Routes>
       </Grid>

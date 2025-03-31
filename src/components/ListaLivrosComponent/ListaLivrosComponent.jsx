@@ -31,7 +31,7 @@ export default function ListaLivrosComponent(props) {
                         {booklist.length > 0 ?
                             props.booklist.map((book) => {
 
-                                if (book.id === 1) {
+                                if (book.readAt) {
                                     return (
                                         <LivroCardComponent
                                             key={book.id}
@@ -40,7 +40,7 @@ export default function ListaLivrosComponent(props) {
                                             titulo={book.title}
                                             genero={book.genre}
                                             lidoEm={book.readAt}
-                                            destaque={true}
+                                            endpointRemoveLivros={props.useRemoveLivro}
                                         ></LivroCardComponent>
                                     )
                                 } else {
@@ -51,7 +51,9 @@ export default function ListaLivrosComponent(props) {
                                             autor={book.author}
                                             titulo={book.title}
                                             genero={book.genre}
-                                            lidoEm={book.readAt}
+                                            lidoEm={"lendo"}
+                                            destaque={true}
+                                            endpointRemoveLivros={props.useRemoveLivro}
                                         ></LivroCardComponent>
                                     )
                                 }

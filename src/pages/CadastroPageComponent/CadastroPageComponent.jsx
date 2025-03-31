@@ -11,7 +11,7 @@ export default function CadastroPageComponent(props) {
             imageAltText="imagem de um livro e um café sobre a mesa"
             imageCredit="Annie Spratt"
             imageAuthorRef={props.news[0].imageAuthorRef}
-            useCadastrarNovoLivro={props.endpointCadastroLivros}
+            useCadastrarNovoLivro={props.useCadastrarNovoLivro}
         ></CadastroComponent>
     )
 }

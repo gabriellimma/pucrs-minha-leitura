@@ -4,7 +4,16 @@ import { Grid } from '@mui/system';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function LivroCardComponent({ numero, autor, titulo, genero, status, lidoEm, destaque }) {
+export default function LivroCardComponent({ numero, autor, titulo, genero, status, lidoEm, destaque, endpointRemoveLivros }) {
+  
+  const handleDelete = async (numero) => {
+    const confirmacao = window.confirm(`Tem certeza que deseja excluir "${titulo}"?`);
+    if (confirmacao) {
+      console.log(`Livro "${titulo}" será deletado.`);
+      endpointRemoveLivros(numero);
+    }
+  }
+  
   return (
     <Paper
       elevation={destaque ? 2 : 0}
@@ -64,13 +73,16 @@ export default function LivroCardComponent({ numero, autor, titulo, genero, stat
         <Typography variant="h7" sx={{ fontWeight: 'bold', fontSize: { xs: 14, sm: 16, md: 20 } }}>{titulo}</Typography>
         <Typography variant="body2" sx={{ color: '#aaa' , fontSize: { xs: 11, sm: 14, md: 16 }}}>{genero}</Typography>
         <Typography variant="body2" sx={{ color: destaque ? '#3b5bfb' : '#000', fontSize: { xs: 11, sm: 14, md: 16 }, fontWeight: '500' }}>
-          {lidoEm ? `Lido em ${lidoEm}` : status}
+          {lidoEm && lidoEm !== 'lendo'? `Lido em ${lidoEm}` : "Lendo"}
         </Typography>
       </Grid>
 
       <Box sx={{ display: 'flex', gap: 0 }}>
         <IconButton>
-          <DeleteIcon sx={{ fontSize: { xs: 18, sm: 20, md: 24 } }} />
+          <DeleteIcon 
+            sx={{ fontSize: { xs: 18, sm: 20, md: 24 } }} 
+            onClick={() => handleDelete(numero)}
+          />
         </IconButton>
         <IconButton>
           <EditIcon sx={{ fontSize: { xs: 18, sm: 20, md: 24 } }} />
