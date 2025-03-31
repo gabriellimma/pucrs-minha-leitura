@@ -3,9 +3,12 @@ import { Box, Typography, IconButton, Paper } from '@mui/material';
 import { Grid } from '@mui/system';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
 
 export default function LivroCardComponent({ numero, autor, titulo, genero, status, lidoEm, destaque, endpointRemoveLivros }) {
-  
+
+  const navigate = useNavigate();
+
   const handleDelete = async (numero) => {
     const confirmacao = window.confirm(`Tem certeza que deseja excluir "${titulo}"?`);
     if (confirmacao) {
@@ -13,7 +16,7 @@ export default function LivroCardComponent({ numero, autor, titulo, genero, stat
       endpointRemoveLivros(numero);
     }
   }
-  
+
   return (
     <Paper
       elevation={destaque ? 2 : 0}
@@ -71,20 +74,30 @@ export default function LivroCardComponent({ numero, autor, titulo, genero, stat
             }
           }}>{autor}</Typography>
         <Typography variant="h7" sx={{ fontWeight: 'bold', fontSize: { xs: 14, sm: 16, md: 20 } }}>{titulo}</Typography>
-        <Typography variant="body2" sx={{ color: '#aaa' , fontSize: { xs: 11, sm: 14, md: 16 }}}>{genero}</Typography>
+        <Typography variant="body2" sx={{ color: '#aaa', fontSize: { xs: 11, sm: 14, md: 16 } }}>{genero}</Typography>
         <Typography variant="body2" sx={{ color: destaque ? '#3b5bfb' : '#000', fontSize: { xs: 11, sm: 14, md: 16 }, fontWeight: '500' }}>
-          {lidoEm && lidoEm !== 'lendo'? `Lido em ${lidoEm}` : "Lendo"}
+          {lidoEm && lidoEm !== 'lendo' ? `Lido em ${lidoEm}` : "Lendo"}
         </Typography>
       </Grid>
 
       <Box sx={{ display: 'flex', gap: 0 }}>
         <IconButton>
-          <DeleteIcon 
-            sx={{ fontSize: { xs: 18, sm: 20, md: 24 } }} 
+          <DeleteIcon
+            sx={{ fontSize: { xs: 18, sm: 20, md: 24 } }}
             onClick={() => handleDelete(numero)}
           />
         </IconButton>
-        <IconButton>
+        <IconButton onClick={() => navigate('/cadastro', {
+          state: {
+            livroEditado: {
+              id: numero,
+              title: titulo,
+              author: autor,
+              genre: genero,
+              readAt: lidoEm
+            }
+          }
+        })}>
           <EditIcon sx={{ fontSize: { xs: 18, sm: 20, md: 24 } }} />
         </IconButton>
       </Box>

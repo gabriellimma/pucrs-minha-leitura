@@ -1,45 +1,65 @@
 import TitleComponent from '../TitleComponent/TitleComponent'
 import { TextField, Button } from '@mui/material';
 import { Box, Grid } from '@mui/system';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './CadastroComponent.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function CadastroComponent(props) {
 
+    const location = useLocation();
+    const livroEditado = location.state?.livroEditado;
     const cadastrarNovoLivro = props.useCadastrarNovoLivro;
+    const editarLivro = props.useEditaLivro;
 
     const [titulo, setTitulo] = useState('');
     const [autor, setAutor] = useState('');
     const [genero, setGenero] = useState('');
     const [dataLeitura, setDataLeitura] = useState('');
 
-    const handleCadastro = async () => {
+    useEffect(() => {
+        if (livroEditado) {
+          setTitulo(livroEditado.title);
+          setAutor(livroEditado.author);
+          setGenero(livroEditado.genre);
+          setDataLeitura(livroEditado.readAt);
+        }
+      }, [livroEditado]);
 
-        if (!titulo || !autor || !genero) {
+    const handleCadastro = async () => {
+        if (!titulo.trim() || !autor.trim() || !genero.trim()) {
             alert("Preencha os campos obrigatórios.");
             return;
         }
 
-        const novoLivro = {
+        const livro = {
             title: titulo,
             author: autor,
             genre: genero,
             readAt: dataLeitura
-        }
+        };
 
         try {
-            await cadastrarNovoLivro(novoLivro);
+            if (livroEditado) {
+                await editarLivro(
+                    {
+                        id: livroEditado.id, 
+                        ...livro
+                    });
+                alert('Livro editado com sucesso!');
+            } else {
+                await cadastrarNovoLivro(livro);
+                alert('Livro cadastrado com sucesso!');
+            }
+
             setTitulo('');
             setAutor('');
             setGenero('');
             setDataLeitura('');
-            alert('Livro cadastrado com sucesso!');
         } catch (error) {
-            console.error('Erro ao cadastrar livro:', error)
-            alert("Erro ao cadastrar livro, tente novamente");
+            console.error('Erro ao salvar livro:', error);
+            alert("Erro ao salvar livro, tente novamente");
         }
-
     }
 
     return (
@@ -108,8 +128,8 @@ export default function CadastroComponent(props) {
                                         }}
                                         onClick={handleCadastro}
                                         disabled={!titulo.trim() || !autor.trim() || !genero.trim()}
-                                        >
-                                        Cadastrar
+                                    >
+                                        {livroEditado ? 'Editar': 'Cadastrar'}
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -161,7 +181,7 @@ export default function CadastroComponent(props) {
                         to="/meus-livros"
                         variant="outlined"
                         sx={{ color: '#3b5bfb', borderColor: '#3b5bfb' }}
-                        >
+                    >
                         Veja seus livros cadastrados
                     </Button>
                 </Grid>

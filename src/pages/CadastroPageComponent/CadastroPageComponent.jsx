@@ -12,6 +12,7 @@ export default function CadastroPageComponent(props) {
             imageCredit="Annie Spratt"
             imageAuthorRef={props.news[0].imageAuthorRef}
             useCadastrarNovoLivro={props.useCadastrarNovoLivro}
+            useEditaLivro={props.useEditaLivro}
         ></CadastroComponent>
     )
 }
