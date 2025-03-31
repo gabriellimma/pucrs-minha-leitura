@@ -76,7 +76,7 @@ export default function LivroCardComponent({ numero, autor, titulo, genero, stat
         <Typography variant="h7" sx={{ fontWeight: 'bold', fontSize: { xs: 14, sm: 16, md: 20 } }}>{titulo}</Typography>
         <Typography variant="body2" sx={{ color: '#aaa', fontSize: { xs: 11, sm: 14, md: 16 } }}>{genero}</Typography>
         <Typography variant="body2" sx={{ color: destaque ? '#3b5bfb' : '#000', fontSize: { xs: 11, sm: 14, md: 16 }, fontWeight: '500' }}>
-          {lidoEm && lidoEm !== 'lendo' ? `Lido em ${lidoEm}` : "Lendo"}
+          {lidoEm && lidoEm.toLowerCase() !== 'lendo' ? `Lido em ${lidoEm}` : "Lendo"}
         </Typography>
       </Grid>
 

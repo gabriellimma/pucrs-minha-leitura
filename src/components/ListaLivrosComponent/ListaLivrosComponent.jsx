@@ -30,35 +30,18 @@ export default function ListaLivrosComponent(props) {
                     <Grid container spacing={2}>
                         {booklist.length > 0 ?
                             props.booklist.map((book) => {
-
-                                if (book.readAt) {
-                                    return (
-                                        <LivroCardComponent
-                                            key={book.id}
-                                            numero={book.id}
-                                            autor={book.author}
-                                            titulo={book.title}
-                                            genero={book.genre}
-                                            lidoEm={book.readAt}
-                                            endpointRemoveLivros={props.useRemoveLivro}
-                                        ></LivroCardComponent>
-                                    )
-                                } else {
-                                    return (
-                                        <LivroCardComponent
-                                            key={book.id}
-                                            numero={book.id}
-                                            autor={book.author}
-                                            titulo={book.title}
-                                            genero={book.genre}
-                                            lidoEm={"lendo"}
-                                            destaque={true}
-                                            endpointRemoveLivros={props.useRemoveLivro}
-                                        ></LivroCardComponent>
-                                    )
-                                }
-
-
+                                return (
+                                    <LivroCardComponent
+                                        key={book.id}
+                                        numero={book.id}
+                                        autor={book.author}
+                                        titulo={book.title}
+                                        genero={book.genre}
+                                        lidoEm={book.readAt}
+                                        destaque={book.readAt === "Lendo" || book.readAt === "lendo" ? true : false}
+                                        endpointRemoveLivros={props.useRemoveLivro}
+                                    ></LivroCardComponent>
+                                )
                             })
                             :
                             <>

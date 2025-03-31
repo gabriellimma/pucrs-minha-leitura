@@ -3,7 +3,7 @@ import { TextField, Button } from '@mui/material';
 import { Box, Grid } from '@mui/system';
 import { useState, useEffect } from 'react';
 import './CadastroComponent.css';
-import { Link, useLocation } from 'react-router-dom';
+import { data, Link, useLocation } from 'react-router-dom';
 
 export default function CadastroComponent(props) {
 
@@ -15,7 +15,7 @@ export default function CadastroComponent(props) {
     const [titulo, setTitulo] = useState('');
     const [autor, setAutor] = useState('');
     const [genero, setGenero] = useState('');
-    const [dataLeitura, setDataLeitura] = useState('');
+    const [dataLeitura, setDataLeitura] = useState('Lendo');
 
     useEffect(() => {
         if (livroEditado) {
@@ -27,7 +27,7 @@ export default function CadastroComponent(props) {
       }, [livroEditado]);
 
     const handleCadastro = async () => {
-        if (!titulo.trim() || !autor.trim() || !genero.trim()) {
+        if (!titulo.trim() || !autor.trim() || !genero.trim() || !dataLeitura.trim()) {
             alert("Preencha os campos obrigatórios.");
             return;
         }
@@ -55,7 +55,7 @@ export default function CadastroComponent(props) {
             setTitulo('');
             setAutor('');
             setGenero('');
-            setDataLeitura('');
+            setDataLeitura('Lendo');
         } catch (error) {
             console.error('Erro ao salvar livro:', error);
             alert("Erro ao salvar livro, tente novamente");
@@ -112,7 +112,8 @@ export default function CadastroComponent(props) {
                                         fullWidth
                                         label="lido em"
                                         variant="outlined"
-                                        helperText="eg: 22/03/2025 ou deixe vazio se você ainda não começou a ler"
+                                        helperText='ex: 22/03/2025 ou "lendo" para livros que ainda estão sendo lidos'
+                                        required
                                         value={dataLeitura}
                                         onChange={(e) => setDataLeitura(e.target.value)}
                                     />
@@ -121,13 +122,13 @@ export default function CadastroComponent(props) {
                                     <Button
                                         variant="contained"
                                         sx={{
-                                            backgroundColor: (!titulo.trim() || !autor.trim() || !genero.trim()) ? 'grey.400' : '#3b5bfb ',
+                                            backgroundColor: (!titulo.trim() || !autor.trim() || !genero.trim() || !dataLeitura.trim()) ? 'grey.400' : '#3b5bfb ',
                                             '&:hover': {
-                                                backgroundColor: (!titulo.trim() || !autor.trim() || !genero.trim()) ? 'grey.500' : '#2141E3'
+                                                backgroundColor: (!titulo.trim() || !autor.trim() || !genero.trim() || !dataLeitura.trim()) ? 'grey.500' : '#2141E3'
                                             }
                                         }}
                                         onClick={handleCadastro}
-                                        disabled={!titulo.trim() || !autor.trim() || !genero.trim()}
+                                        disabled={!titulo.trim() || !autor.trim() || !genero.trim() || !dataLeitura.trim()}
                                     >
                                         {livroEditado ? 'Editar': 'Cadastrar'}
                                     </Button>
