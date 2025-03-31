@@ -1,11 +1,47 @@
 import TitleComponent from '../TitleComponent/TitleComponent'
 import { TextField, Button } from '@mui/material';
 import { Box, Grid } from '@mui/system';
-
+import { useState } from 'react';
 import './CadastroComponent.css';
 import { Link } from 'react-router-dom';
 
 export default function CadastroComponent(props) {
+
+    const cadastrarNovoLivro = props.useCadastrarNovoLivro;
+
+    const [titulo, setTitulo] = useState('');
+    const [autor, setAutor] = useState('');
+    const [genero, setGenero] = useState('');
+    const [dataLeitura, setDataLeitura] = useState('');
+
+    const handleCadastro = async () => {
+
+        if (!titulo || !autor || !genero) {
+            alert("Preencha os campos obrigatórios.");
+            return;
+        }
+
+        const novoLivro = {
+            title: titulo,
+            author: autor,
+            genre: genero,
+            readAt: dataLeitura
+        }
+
+        try {
+            await cadastrarNovoLivro(novoLivro);
+            setTitulo('');
+            setAutor('');
+            setGenero('');
+            setDataLeitura('');
+            alert('Livro cadastrado com sucesso!');
+        } catch (error) {
+            console.error('Erro ao cadastrar livro:', error)
+            alert("Erro ao cadastrar livro, tente novamente");
+        }
+
+    }
+
     return (
         <Grid direction="column" alignItems="center" sx={{ minHeight: '90vh' }}>
             <Grid item size={12}>
@@ -23,13 +59,33 @@ export default function CadastroComponent(props) {
                         <Grid item size={{ xs: 12, md: 8 }}>
                             <Grid container direction="column" spacing={2}>
                                 <Grid item>
-                                    <TextField fullWidth label="nome do livro" variant="outlined" />
+                                    <TextField
+                                        fullWidth
+                                        label="nome do livro"
+                                        variant="outlined"
+                                        required
+                                        value={titulo}
+                                        onChange={(e) => setTitulo(e.target.value)}
+                                    />
                                 </Grid>
                                 <Grid item>
-                                    <TextField fullWidth label="nome do autor" variant="outlined" />
+                                    <TextField
+                                        fullWidth
+                                        label="nome do autor"
+                                        variant="outlined"
+                                        required
+                                        value={autor}
+                                        onChange={(e) => setAutor(e.target.value)} />
                                 </Grid>
                                 <Grid item>
-                                    <TextField fullWidth label="gênero literário" variant="outlined" />
+                                    <TextField
+                                        fullWidth
+                                        label="gênero literário"
+                                        variant="outlined"
+                                        required
+                                        value={genero}
+                                        onChange={(e) => setGenero(e.target.value)}
+                                    />
                                 </Grid>
                                 <Grid item>
                                     <TextField
@@ -37,12 +93,22 @@ export default function CadastroComponent(props) {
                                         label="lido em"
                                         variant="outlined"
                                         helperText="eg: 22/03/2025 ou deixe vazio se você ainda não começou a ler"
+                                        value={dataLeitura}
+                                        onChange={(e) => setDataLeitura(e.target.value)}
                                     />
                                 </Grid>
                                 <Grid item sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                                     <Button
                                         variant="contained"
-                                        sx={{ background: 'linear-gradient(90deg, #3b5bfb 0%, #5f70ff 100%)' }}>
+                                        sx={{
+                                            backgroundColor: (!titulo.trim() || !autor.trim() || !genero.trim()) ? 'grey.400' : '#3b5bfb ',
+                                            '&:hover': {
+                                                backgroundColor: (!titulo.trim() || !autor.trim() || !genero.trim()) ? 'grey.500' : '#2141E3'
+                                            }
+                                        }}
+                                        onClick={handleCadastro}
+                                        disabled={!titulo.trim() || !autor.trim() || !genero.trim()}
+                                        >
                                         Cadastrar
                                     </Button>
                                 </Grid>
@@ -94,7 +160,8 @@ export default function CadastroComponent(props) {
                         component={Link}
                         to="/meus-livros"
                         variant="outlined"
-                        sx={{ color: '#3b5bfb', borderColor: '#3b5bfb' }}>
+                        sx={{ color: '#3b5bfb', borderColor: '#3b5bfb' }}
+                        >
                         Veja seus livros cadastrados
                     </Button>
                 </Grid>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function useBooklist() {
+function useBooklist(shouldReload) {
 
     const [booklist, setBooklist] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -22,7 +22,7 @@ function useBooklist() {
             }
         }
         getBooks();
-    }, [])
+    }, [shouldReload])
 
     return { booklist, loading, erro }
 }

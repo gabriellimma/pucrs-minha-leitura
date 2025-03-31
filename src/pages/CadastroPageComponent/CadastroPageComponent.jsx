@@ -2,8 +2,6 @@ import CadastroComponent from "../../components/CadastroComponent/CadastroCompon
 
 export default function CadastroPageComponent(props) {
 
-    const news = props.news;
-
     return (
         <CadastroComponent
             upperTitle="leia todo dia"
@@ -12,7 +10,8 @@ export default function CadastroPageComponent(props) {
             imageLink="https://unsplash.com/photos/closed-wabi-sabi-book-on-brown-wooden-surface-ZT4_d3-vyUg?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash"
             imageAltText="imagem de um livro e um café sobre a mesa"
             imageCredit="Annie Spratt"
-            imageAuthorRef={news[0].imageAuthorRef}
+            imageAuthorRef={props.news[0].imageAuthorRef}
+            useCadastrarNovoLivro={props.endpointCadastroLivros}
         ></CadastroComponent>
     )
 }
