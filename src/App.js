@@ -11,6 +11,7 @@ import useBooklist from './hooks/useBooklist';
 import useAddBook from './hooks/useAddBook';
 import useRemoveBook from './hooks/useRemoveBook';
 import useEditBook from './hooks/useEditBook';
+import FooterComponent from './components/FooterComponent/FooterComponent';
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
           />} />
         </Routes>
       </Grid>
+      <FooterComponent></FooterComponent>
     </Router>
   );
 }
