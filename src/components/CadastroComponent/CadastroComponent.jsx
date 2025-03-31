@@ -3,7 +3,7 @@ import { TextField, Button } from '@mui/material';
 import { Box, Grid } from '@mui/system';
 import { useState, useEffect } from 'react';
 import './CadastroComponent.css';
-import { data, Link, useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function CadastroComponent(props) {
 
