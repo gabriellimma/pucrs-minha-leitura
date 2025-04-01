@@ -9,7 +9,7 @@ function useBooklist(shouldReload) {
     useEffect(() => {
         async function getBooks() {
             try {
-                const response = await fetch('http://localhost:5001/books');
+                const response = await fetch('http://localhost:5000/books');
                 if (!response.ok) {
                     throw new Error("falha ao recuperar livros");
                 }

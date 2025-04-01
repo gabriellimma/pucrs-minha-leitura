@@ -17,6 +17,8 @@ npm install
 npm start
 ```
 
+4. O front-end espera a api de livros na porta 5000 (http://localhost:5000).
+
 Após execução do projeto, este é o resultado esperado no navegador:
 ![Gif mostrando o resultado esperado ao rodar este projeto](./docs/project-overview.gif)
 
@@ -28,34 +30,112 @@ Este projeto contém uma estrutura básica para um CRUD de um Reading Journal, d
 
 Os componentes estão no diretório `./src/components` e eles possuem as seguintes características:
 
-- BookFormComponent:
-  - `props`
-    - booklist: um array com a lista de livros;
-    - setBookList: função para atualizar a lista de livros;
-    - inputNameRef: referência para o input de nome do livro;
-    - book: objeto com as informações do livro a ser editado;
-    - setBook: função para atualizar o estado do livro a ser editado;
-  - Descrição: este componente é responsável por cadastrar novos livros na lista e também é responsável por validações de campos requeridos ou se algum valor foi inserido incorretamente. Também permite a edição de livros existentes.
+### `HeaderComponent`
+Renderiza a barra de navegação superior do projeto com links para navegação.
 
-- BookListComponent:
-  - `props`
-    - booklist: um array com a lista de livros;
-    - setBookList: função para atualizar a lista de livros;
-    - focusFunction: função para focar no input de nome do livro;
-    - editBook: função para definir o livro a ser editado;
-  - Descrição: este componente é responsável por listar os livros cadastrados, permitir a remoção de livros, buscar pelo autor ou comprar o livro no link cadastrado. Também permite a edição de livros existentes.
+**Props:** nenhuma.
 
-- TitleComponent:
-  - `props`
-    - title: título da seção;
-    - paragraph: parágrafo descritivo da seção;
-    - titleID: ID do título para navegação;
-  - Descrição: este componente é responsável por renderizar os títulos e parágrafos das seções.
+---
 
-- NavbarComponent:
-  - `props`
-    - menuItems: array com os itens do menu de navegação;
-  - Descrição: este componente é responsável por renderizar a barra de navegação.
+### `FooterComponent`
+Renderiza o rodapé do projeto com uma mensagem institucional.
+
+**Props:** nenhuma.
+
+---
+
+### `TitleComponent`
+Exibe o título principal da página.
+
+**Props:**
+- `upperTitle` (string): o texto a ser exibido como preheader.
+- `title` (string): o texto a ser exibido como título.
+- `subtitle` (string): o texto a ser exibido como sub-título.
+- `mainButtonText` (string): o texto a ser exibido como texto do botão principal.
+- `secondaryButtonText` (string): o texto a ser exibido como texto do botão secundário.
+
+---
+
+### `LivroCardComponent`
+Componente visual que representa um livro individual na lista. Exibe informações como título, autor, status de leitura e permite editar ou remover.
+
+**Props:**
+- `numero` (number): ID do livro.
+- `autor` (string): nome do autor.
+- `titulo` (string): título do livro.
+- `genero` (string): gênero literário.
+- `status` (string): status de leitura.
+- `lidoEm` (string): data de leitura (ou "lendo").
+- `destaque` (boolean): se o cartão deve ter estilo de destaque.
+- `endpointRemoveLivros` (function): função executada ao clicar no ícone de remoção.
+
+---
+
+### `ListaLivrosComponent`
+Componente responsável por renderizar a lista completa de livros.
+
+**Props:**
+- `booklist` (array): lista de livros a ser exibida.
+- `useRemoveLivro` (function): função que será executada ao remover um livro.
+
+---
+
+### `CadastroComponent`
+Formulário para cadastrar ou editar livros. O modo edição é ativado se os dados forem passados via navegação (`location.state.livroEditado`).
+
+**Props:**
+- `useCadastrarNovoLivro` (function): função para criar um novo livro.
+- `useSalvarLivro` (function): alias para a função acima.
+- `useEditaLivro` (function): função que edita um livro existente.
+
+---
+
+## Hooks personalizados
+
+Os hooks personalizados estão localizados no diretório `./src/hooks`:
+
+### `useBooklist`
+Hook para obter a lista de livros da API.
+
+**Uso:**
+```js
+const { booklist, carregarBooklist } = useBooklist();
+```
+
+Retorna a lista de livros e uma função para forçar o recarregamento.
+
+---
+
+### `useAddBook`
+Hook para adicionar um novo livro via API.
+
+**Uso:**
+```js
+const cadastrarLivro = useAddBook();
+await cadastrarLivro(livro);
+```
+
+---
+
+### `useEditaLivro`
+Hook para editar um livro existente via API.
+
+**Uso:**
+```js
+const editarLivro = useEditaLivro();
+await editarLivro(id, livroAtualizado);
+```
+
+---
+
+### `useRemoveLivro`
+Hook para remover um livro da lista.
+
+**Uso:**
+```js
+const removerLivro = useRemoveLivro();
+await removerLivro(id);
+```
 
 ## Conclusão
 

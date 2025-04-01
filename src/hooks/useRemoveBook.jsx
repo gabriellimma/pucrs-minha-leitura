@@ -1,6 +1,6 @@
 function useRemoveBook(setShouldReload) {
     async function removeBook(idLivro) {
-      const response = await fetch(`http://localhost:5001/books/${idLivro}`, {
+      const response = await fetch(`http://localhost:5000/books/${idLivro}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
       });

@@ -1,6 +1,6 @@
 function useAddBook(setShouldReload) {
     async function addBook(novoLivro) {
-      const response = await fetch("http://localhost:5001/books", {
+      const response = await fetch("http://localhost:5000/books", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(novoLivro)
