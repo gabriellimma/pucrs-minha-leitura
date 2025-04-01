@@ -4,7 +4,7 @@ Para executar este projeto:
 
 1. Entre na pasta do projeto no terminal:
 ```
-cd local-baixado/pucrs-fase2-reading-journal
+cd local-baixado/pucrs-minha-leitura
 ```
 
 2. Rode npm install para instalar as dependências do projeto:
